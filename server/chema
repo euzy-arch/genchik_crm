@@ -1,0 +1,38 @@
+CRM ФИНАНСОВОГО УЧЕТА С AI
+├── Серверная часть (Node.js + Express)
+│   ├── Конфигурация
+│   │   ├── database.js           # Подключение к SQLite БД
+│   │   └── cors.js               # Настройки CORS
+│   │
+│   ├── Контроллеры
+│   │   ├── aiController.js       # Основной AI контроллер
+│   │   ├── aiStorageController.js # Хранение AI аналитики
+│   │   └── operationsController.js # Управление операциями
+│   │
+│   ├── Сервисы
+│   │   ├── aiService.js          # Внутренний AI сервис
+│   │   ├── mistralAIService.js   # Интеграция с Mistral AI
+│   │   ├── yandexAIService.js    # Интеграция с Yandex GPT
+│   │   ├── aiAnalyticsStorage.js # Хранение AI аналитики
+│   │   └── operationsService.js   # Бизнес-логика операций
+│   │
+│   ├── Маршруты
+│   │   ├── aiRouters.js          # AI endpoints
+│   │   ├── aiStorageRoutes.js    # Хранение AI аналитики
+│   │   └── operationsRoutes.js    # Операции и аналитика
+│   │
+│   └── Основные файлы
+│       ├── index.js              # Точка входа сервера
+│       └── package.json          # Зависимости
+│
+├── Клиентская часть (React/Vue)
+│   ├── services/financeService.js # API клиент
+│   ├── components/                # UI компоненты
+│   └── pages/                     # Страницы приложения
+│
+└── База данных (SQLite)
+    ├── operations                # Финансовые операции
+    ├── categories                # Категории расходов
+    ├── ai_analytics             # AI аналитика
+    ├── ai_forecasts             # Прогнозы
+    └── ai_chat_history          # История чата

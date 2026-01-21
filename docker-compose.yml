@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./server
+    container_name: finance-backend
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=5001
+      - MISTRAL_API_KEY=${MISTRAL_API_KEY:-}
+      - DB_PATH=/data/database.sqlite
+      - CORS_ORIGIN=http://localhost:3000,http://localhost:80,http://frontend:80
+    volumes:
+      - database_data:/data
+      - ./server/.env:/app/.env:ro
+    networks:
+      - finance-network
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5001/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  frontend:
+    build: .
+    container_name: finance-frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "80:80"
+    networks:
+      - finance-network
+
+volumes:
+  database_data:
+
+networks:
+  finance-network:
+    driver: bridge
