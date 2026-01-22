@@ -51,4 +51,6 @@ Thumbs.db
 dist/
 build/
 .out/
-.next/
+.next/server/.env
+*.db
+*.sqlite
